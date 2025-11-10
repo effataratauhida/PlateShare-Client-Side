@@ -3,6 +3,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import Root from '../Root/Root';
 import Home from '../Home/Home';
 import Error from '../Error/Error';
+import AvailableFoods from '../Available-Foods/AvailableFoods';
+import FoodDetails from '../Private-Routes/FoodDetails';
 
 export const router = createBrowserRouter([
     {
@@ -13,6 +15,17 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home></Home>
+            },
+            {
+            path: '/availableFoods',
+            element: <AvailableFoods></AvailableFoods>,
+            loader: () => fetch('http://localhost:3000/foodData')
+            }, 
+            {
+                path: '/food/:id',
+                element: <FoodDetails></FoodDetails>,
+                loader: () => fetch('http://localhost:3000/foodData')
+
             }
         ]
     }
