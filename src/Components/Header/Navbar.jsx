@@ -49,7 +49,7 @@ const Navbar = () => {
                 </div>
 
                 <div className="navbar-end gap-3">
-                    <button
+                    <Link
                         to="/auth/login" 
                          
                         className='py-1 px-2 sm:py-2 sm:px-3 md:py-2 md:px-6 cursor-pointer 
@@ -58,7 +58,7 @@ const Navbar = () => {
                         text-white hover:text-[#005a32] 
                         '>
                          Login
-                    </button> 
+                    </Link> 
                     
                    
                 </div>

@@ -49,7 +49,7 @@ const AvailableFoods = () => {
                 {/* view details */}
                  <button className='mt-4 py-1 px-2 sm:py-2 sm:px-3 md:py-2 md:px-6 w-full cursor-pointer 
                         rounded-sm font-semibold text-sm sm:text-base bg-[#238b45] hover:bg-transparent
-                        border-[#238b45] hover:border-[#005a32] border-2 hover:scale-110
+                        border-[#238b45] hover:border-[#005a32] border-2 hover:scale-105
                         text-white hover:text-[#005a32] 
                         '>View Details</button>  
                 </div>
