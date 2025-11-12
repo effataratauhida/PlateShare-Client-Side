@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 
 const AddFood = () => {
   const { user } = useContext(AuthContext);
@@ -12,6 +13,7 @@ const AddFood = () => {
   const [expireDate, setExpireDate] = useState('');
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
  
 
@@ -44,6 +46,7 @@ const AddFood = () => {
       .then(data => {
         if (data.insertedId) {
           toast.success('Food added successfully!');
+         navigate('/')
           setFoodName('');
           setFoodImage(null);
           setFoodQty('');

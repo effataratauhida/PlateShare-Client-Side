@@ -1,5 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { FaXTwitter } from "react-icons/fa6";
+import { FaFacebookF } from "react-icons/fa6";
+import { PiYoutubeLogoFill } from "react-icons/pi";
+import { FaSquareInstagram } from "react-icons/fa6";
 
 const Footer = () => {
     return (
@@ -41,13 +45,14 @@ const Footer = () => {
                         </ul>
                     </div>
                     {/* social links */}
-                       <div className='mt-6 text-[#edf8e9] flex gap-3'>
+                    <div><h5 className='text-[#edf8e9] font-medium text-lg'>Connect with Us</h5>
+                    <div className='mt-3 text-[#edf8e9] flex gap-3'>
 
                         {/* facebook */}
 
                         <a href="https://www.facebook.com/programmingHero" target="_blank" rel="noopener noreferrer">
 
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook-icon lucide-facebook hover:scale-125"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        <FaFacebookF className='w-7 h-7 hover:scale-125'/>
                         
                         </a>
                         
@@ -55,27 +60,31 @@ const Footer = () => {
                           {/* youtube */}
                           
                         <a href="https://www.youtube.com/c/ProgrammingHero" target="_blank" rel="noopener noreferrer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube-icon lucide-youtube hover:scale-125"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg></a>
+                        <PiYoutubeLogoFill className='w-7 h-7 hover:scale-125'/>
+                        </a>
                         
 
                         {/* instagram */}
 
                         <a href="https://www.instagram.com/programminghero?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" 
-                        class="lucide lucide-instagram-icon lucide-instagram hover:scale-125"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                        <FaSquareInstagram className='w-7 h-7 hover:scale-125'/>
+                        </a>
                         
                         {/* twitter */}
 
                         <a href="https://x.com/ProgrammingHero" target="_blank" rel="noopener noreferrer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter-icon lucide-twitter hover:scale-125"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+                          <FaXTwitter className='w-7 h-7 hover:scale-125'/>
+                        </a>
                         
-                       </div>
+                       </div></div>
+                       
                    
                    
                 </div>
                 <div className='max-w-11/12 mx-auto'>
                 <hr className='text-[#edf8e9] mt-3'/>
-                <p className='text-[#edf8e9] mt-3 text-center font-medium py-5' >Copyright reserved by @2025</p></div>
+                <p className='text-[#edf8e9]  text-center font-medium py-5' >Copyright reserved by @2025</p>
+                </div>
                 
             </footer>
     );

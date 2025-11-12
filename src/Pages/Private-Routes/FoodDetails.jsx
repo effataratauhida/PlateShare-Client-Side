@@ -1,9 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
+import toast from 'react-hot-toast';
 
 const FoodDetails = () => {
+
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
   const [food, setFood] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [requests, setRequests] = useState([]);
+  const isOwner = user?.email === food?.donator_email;
+  const [requestData, setRequestData] = useState({
+    location: '',
+    reason: '',
+    contactNo: ''
+  });
+
 
   useEffect(() => {
     fetch(`http://localhost:3000/foodData/${id}`)
@@ -12,7 +25,76 @@ const FoodDetails = () => {
       .catch(err => console.error(err));
   }, [id]);
 
+
+useEffect(() => {
+  if (isOwner) {
+    fetch(`http://localhost:3000/foodRequests?foodId=${food._id}`)
+      .then(res => res.json())
+      .then(data => setRequests(data))
+      .catch(err => console.error(err));
+  }
+}, [food, isOwner]);
+
   if (!food) return <p>Loading...</p>;
+
+  const handleRequestSubmit = (e) => {
+  e.preventDefault();
+  if (!user) {
+    toast.error("You must be logged in to request food");
+    return;
+  }
+
+  const newRequest = {
+    foodId: food._id,
+    foodName: food.food_name,
+    requesterEmail: user.email,
+    requesterName: user.displayName,
+    requesterPhoto: user.photoURL,
+    location: requestData.location,
+    reason: requestData.reason,
+    contactNo: requestData.contactNo,
+    status: "pending"
+  };
+
+  fetch('http://localhost:3000/foodRequests', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newRequest)
+  })
+    .then(res => res.json())
+    .then(data => {
+      toast.success("Request submitted successfully!");
+      setShowModal(false);
+      setRequestData({ location: '', reason: '', contactNo: '' });
+    })
+    .catch(err => console.error(err));
+};
+
+
+
+const handleRequestAction = (requestId, action) => {
+  fetch(`http://localhost:3000/foodRequests/${requestId}`, {
+    method: 'PATCH', 
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status: action })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.modifiedCount > 0) {
+        setRequests(prev => prev.map(req => req._id === requestId ? {...req, status: action} : req));
+        if (action === 'accepted') {
+          // Food status update
+          fetch(`http://localhost:3000/foodData/${food._id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ food_status: 'donated' })
+          });
+        }
+      }
+    })
+    .catch(err => console.error(err));
+};
+
 
   return (
     <div className="max-w-11/12 mx-auto my-10 p-4 bg-[#edf8e9] rounded-sm shadow-lg">
@@ -34,11 +116,12 @@ const FoodDetails = () => {
                 <p className='border-2 border-[#005a32] px-4 py-1 mt-2 text-[#005a32] inline-block text-center rounded-3xl'>{food.food_status}</p>
                 <br />
 
-                <button className='mt-4 py-1 px-2 sm:py-2 sm:px-3 md:py-2 md:px-6 inline-block cursor-pointer 
-                        rounded-sm font-semibold text-sm sm:text-base bg-[#238b45] hover:bg-transparent
-                        border-[#238b45] hover:border-[#005a32] border-2 hover:scale-105
-                        text-white hover:text-[#005a32]'>
-                        Request Food</button>  
+                <button   onClick={() => setShowModal(true)}
+                 className='mt-4 py-1 px-2 sm:py-2 sm:px-3 md:py-2 md:px-6 inline-block cursor-pointer 
+                  rounded-sm font-semibold text-sm sm:text-base bg-[#238b45] hover:bg-transparent
+                border-[#238b45] hover:border-[#005a32] border-2 hover:scale-105
+                text-white hover:text-[#005a32]'>
+                  Request Food</button>  
                 </div>
                 
             </div>
@@ -59,7 +142,89 @@ const FoodDetails = () => {
                 </div>
         
             </div>
+
+
+
+          {showModal && (
+            <div className="fixed inset-0 bg-[#edf8e9]  bg-opacity-50 flex justify-center items-center">
+              <div className="bg-white p-6 rounded-lg w-11/12 max-w-md">
+                <h2 className="text-2xl font-bold text-[#005a32] mb-4">Request Food</h2>
+      <form onSubmit={handleRequestSubmit} 
+      className="space-y-4">
+        <input
+          type="text"
+          placeholder="Your Location"
+          value={requestData.location}
+          onChange={e => setRequestData({...requestData, location: e.target.value})}
+          className="w-full p-2 border rounded"
+          required
+        />
+        <textarea
+          placeholder="Why do you need food?"
+          value={requestData.reason}
+          onChange={e => setRequestData({...requestData, reason: e.target.value})}
+          className="w-full p-2 border rounded"
+          required
+        />
+        <input
+          type="text"
+          placeholder="Contact No"
+          value={requestData.contactNo}
+          onChange={e => setRequestData({...requestData, contactNo: e.target.value})}
+          className="w-full p-2 border rounded"
+          required
+        />
+        <div className="flex justify-end gap-2">
+          <button type="button" onClick={() => setShowModal(false)} className="px-4 py-2  rounded 
+           text-[#238b45] border-2 font-semibold">Cancel</button>
+
+          <button type="submit" className="px-4 py-2 bg-[#238b45] text-white rounded
+          hover:bg-transparent hover:text-[#238b45] hover:border-2 hover
+          border-[#238b45] font-semibold">Submit Request</button>
         </div>
+      </form>
+    </div>
+  </div>
+)}
+
+
+{isOwner && requests.length > 0 && (
+  <div className="mt-10">
+    <h2 className="text-2xl font-bold text-[#005a32] mb-4">Food Requests</h2>
+    <table className="w-full border">
+      <thead>
+        <tr className="bg-[#edf8e9]">
+          <th className="border px-4 py-2">Requester Name</th>
+          <th className="border px-4 py-2">Email</th>
+          <th className="border px-4 py-2">Location</th>
+          <th className="border px-4 py-2">Reason</th>
+          <th className="border px-4 py-2">Contact</th>
+          <th className="border px-4 py-2">Status</th>
+          <th className="border px-4 py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {requests.map(req => (
+          <tr key={req._id} className="text-center">
+            <td className="border px-4 py-2">{req.requesterName}</td>
+            <td className="border px-4 py-2">{req.requesterEmail}</td>
+            <td className="border px-4 py-2">{req.location}</td>
+            <td className="border px-4 py-2">{req.reason}</td>
+            <td className="border px-4 py-2">{req.contactNo}</td>
+            <td className="border px-4 py-2">{req.status}</td>
+            <td className="border px-4 py-2 flex justify-center gap-2">
+              <button onClick={() => handleRequestAction(req._id, 'accepted')} className="px-2 py-1 bg-green-500 text-white rounded">Accept</button>
+              <button onClick={() => handleRequestAction(req._id, 'rejected')} className="px-2 py-1 bg-red-500 text-white rounded">Reject</button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
+
+        </div>
+        
     
   );
 };

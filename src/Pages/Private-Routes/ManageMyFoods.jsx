@@ -52,26 +52,6 @@ const ManageMyFoods = () => {
 };
 
 
-//   const handleDelete = (id) => {
-//   const confirm =  Swal.fire({
-//           text: "Are you sure want to delete?",
-          
-//           confirmButtonText: "OK",
-//         });;
-//   if (confirm) {
-//     fetch(`http://localhost:3000/foodData/${id}`, {
-//       method: 'DELETE'
-//     })
-//       .then(res => res.json())
-//       .then(data => {
-//         if (data.deletedCount) {
-//           setMyFoods(myFoods.filter(f => f._id !== id));
-//           toast.success("The food is deleted successfully!");
-//         }
-//       })
-//       .catch(err => console.error(err));
-//   }
-// }
 
     return (
 
@@ -90,7 +70,12 @@ const ManageMyFoods = () => {
 
                   <div className='max-w-7/12 mx-auto  pb-20 '>
                 
-
+                  {
+                    myFoods.length === 0 ? (
+                     <p className="text-center text-2xl text-green-900 font-bold mt-10">
+                         No food items found.
+                         </p>
+                     ) : (
                     <table >
                         <thead >
                             <tr className="border-b border-gray-400 bg-[#edf8e9] shadow-lg text-center">
@@ -134,37 +119,11 @@ const ManageMyFoods = () => {
                             ))}
                         </tbody>        
                     </table>
-                
+                 )}         
             
         </div> 
 
-
-
-                {/* <div className='max-w-11/12 mx-auto  pb-20 '>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10'>
-        {myFoods.map(food => (
-          <div key={food._id} className='bg-[#edf8e9] p-4 rounded shadow'>
-            <img src={food.food_image} alt={food.food_name} className='w-full max-h-48 rounded'/>
-            <h2 className='mt-2 font-bold text-lg'>{food.food_name}</h2>
-            <p>Quantity: {food.food_qty}</p>
-            <p>Pickup: {food.pickup_location}</p>
-            <p>Status: {food.food_status}</p>
-
-            <div className='flex gap-3 mt-3'>
-              <button 
-                className='bg-blue-500 text-white px-3 py-1 rounded'
-                onClick={() => handleUpdate(food._id)}>Update</button>
-              <button 
-                className='bg-red-500 text-white px-3 py-1 rounded'
-                onClick={() => handleDelete(food._id)}>Delete</button>
-            </div>
-          </div>
-        ))}
-      </div>
-                </div> */}
-
-
-           </div>
+ </div>
         
     );
 };
