@@ -1,0 +1,39 @@
+        /* <div className='max-w-11/12 mx-auto  pb-20 '>
+    {{myFoods.map(food => (
+               
+               <tr key={food._id}
+            className="border-b bg-[#edf8e9]">
+            <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                <img src={food.food_image}  alt='' className="w-12 h-12 rounded-full object-cover inline-block mr-3 shadow-sm" />
+                {food.food_name}
+            </td>
+
+            <td className="px-6 py-4 text-center text-lg font-medium text-[#238b45]">
+               {food.food_qty}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap">
+                {food.pickup_location} 
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap">
+                {food.food_status}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-right flex justify-end items-center space-x-2">
+                <button 
+                    onClick={() => openEditModal(food)}
+                    className="py-1 px-3 rounded-lg font-semibold text-blue-600 border border-blue-600 hover:bg-blue-50 transition"
+                >
+                    (Edit)
+                </button>
+                <button 
+                    onClick={() => openDeleteModal(food)}
+                    className="py-1 px-3 rounded-lg font-semibold text-red-600 border border-red-600 hover:bg-red-50 transition"
+                >
+                    (Delete)
+                </button>
+            </td>
+        </tr>
+
+    
+    ))}
+            
+        </div> */
