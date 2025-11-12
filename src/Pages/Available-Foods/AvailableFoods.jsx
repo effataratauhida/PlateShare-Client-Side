@@ -1,6 +1,6 @@
 import React from 'react';
 import bannerI from '../../assets/a.png'
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 
 
@@ -31,25 +31,28 @@ const AvailableFoods = () => {
                     <img src={food.food_image} alt="" className='w-full max-h-[250px] rounded-sm' />
 
                     <h2 className='mt-4 font-bold text-xl text-[#005a32]'>{food.food_name}</h2>
+                    
 
                      {/* donator name , img */}
                     <div className='flex flex-col-reverse sm:flex-row items-center justify-between '>
                         <h2 className=' font-bold text-base text-[#005a32]'>Donator's Name: <span className='font-medium text-base text-[#005a32] '>{food.donator_name}</span></h2>
-                        <img src={food.donator_image} alt="" className='w-10 h-10 rounded-full'/>
+                        <img src={food.donator_image} alt="" className='w-12 h-12 rounded-full'/>
                     </div>
 
                     <h3 className=' font-bold text-base text-[#005a32] '>Quantity: <span className='font-medium text-base text-[#005a32] '>{food.food_qty}</span></h3>
 
-                    <h3 className='mt-1 font-bold text-base text-[#005a32] '>Pickup Location: <span className='font-medium text-base text-[#005a32] '>{food.pickup_location}</span>
+                    <h3 className='mt-2 font-bold text-base text-[#005a32] '>Pickup Location: <span className='font-medium text-base text-[#005a32] '>{food.pickup_location}</span>
                     </h3>
 
-                    <h3 className='mt-1 font-bold text-base text-[#005a32] '>Expire Date: <span className='font-medium text-base text-[#005a32] '>{food.expire_date}</span></h3>
+                    <h3 className='mt-2 font-bold text-base text-[#005a32] '>Expire Date: <span className='font-medium text-base text-[#005a32] '>{food.expire_date}</span></h3>
+
+                    
                 {/* view details */}
                  <button className='mt-4 py-1 px-2 sm:py-2 sm:px-3 md:py-2 md:px-6 w-full cursor-pointer 
                         rounded-sm font-semibold text-sm sm:text-base bg-[#238b45] hover:bg-transparent
                         border-[#238b45] hover:border-[#005a32] border-2 hover:scale-105
-                        text-white hover:text-[#005a32] 
-                        '>View Details</button>  
+                        text-white hover:text-[#005a32]'>
+                            <Link to={`/food/${food._id}`}>View Details</Link></button>  
                 </div>
                 ))
             ) : (

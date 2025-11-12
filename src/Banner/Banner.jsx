@@ -32,7 +32,7 @@ const Banner = () => {
 
                 <Link 
                 to="/availableFoods"
-                className='mt-4 py-3 px-8 
+                className='mt-4 py-3 px-10 
                 cursor-pointer rounded-sm font-semibold text-lg
                 text-[#005a32] bg-[#edf8e9] hover:bg-[#238b45] hover:text-[#edf8e9]
                 hover:scale-110  
@@ -60,14 +60,23 @@ const Banner = () => {
                         <img src={food.food_image} className='w-full max-h-[250px] rounded-sm'></img>
 
                         <h2 className='mt-4 font-bold text-xl text-[#005a32]'>{food.food_name}</h2>
-
-                        <h3 className=' font-bold text-base text-[#005a32] mt-2 '>Quantity: <span className='font-medium text-base text-[#005a32] '>Serves {food.food_qty} people</span></h3>
+                        
+                        <div className='flex items-center justify-between'>
+                            <h3 className=' font-bold text-base text-[#005a32] mt-2 '>Quantity: <span className='font-medium text-base text-[#005a32] '>
+                            Serves {food.food_qty} people</span></h3>
+                            <p className='border-2 border-[#005a32] px-4 py-1 mt-4 text-[#005a32] font-medium inline-block 
+                            text-center rounded-3xl'>
+                            {food.food_status}</p>
+                        </div>
+                        
                          {/* view details */}
-                 <button className='mt-4 py-1 px-2 sm:py-2 sm:px-3 md:py-2 md:px-6 w-full cursor-pointer 
+                 <button 
+                 className='mt-4 py-1 px-2 sm:py-2 sm:px-3 md:py-2 md:px-6 w-full cursor-pointer 
                         rounded-sm font-semibold text-sm sm:text-base bg-[#238b45] hover:bg-transparent
                         border-[#238b45] hover:border-[#005a32] border-2 hover:scale-105
                         text-white hover:text-[#005a32] 
-                        '>View Details</button>
+                        '>
+                        <Link  to={`/food/${food._id}`}>View Details</Link></button>
                     </div>
                     ))}
                    
@@ -75,17 +84,19 @@ const Banner = () => {
 
 
                  {/* show all btn */}
-
-                 <Link
+                <div className="flex justify-center">
+                    <Link
                      to="/availableFoods" 
                       
-                     className=' py-4 px-10  cursor-pointer 
+                     className=' py-3 px-10  cursor-pointer 
                      rounded-sm font-semibold text-sm sm:text-base bg-[#238b45] hover:bg-transparent
                      border-[#238b45] hover:border-[#005a32] border-2 hover:scale-110
                      text-white hover:text-[#005a32] 
                      '>
                     Show All
-                </Link> 
+                </Link>
+                </div>
+                  
             </div>
 
             {/* how it works */}

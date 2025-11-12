@@ -10,7 +10,7 @@ const AddFood = () => {
   const [foodQty, setFoodQty] = useState('');
   const [pickupLocation, setPickupLocation] = useState('');
   const [expireDate, setExpireDate] = useState('');
-  const [notes, setNotes] = useState('');
+  const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false);
 
  
@@ -27,7 +27,7 @@ const AddFood = () => {
       food_qty: foodQty,
       pickup_location: pickupLocation,
       expire_date: expireDate,
-      notes: notes,
+      description: description,
       donator_name: user?.displayName,
       donator_email: user?.email,
       donator_image: user?.photoURL,
@@ -49,7 +49,7 @@ const AddFood = () => {
           setFoodQty('');
           setPickupLocation('');
           setExpireDate('');
-          setNotes('');
+          setDescription('');
         }
       })
       .catch(() => toast.error('Failed to add food.'))
@@ -92,7 +92,7 @@ const AddFood = () => {
               required className="input mt-3" />
 
             <textarea placeholder="Additional Notes"
-              value={notes} onChange={e => setNotes(e.target.value)}
+              value={description} onChange={e => setNotes(e.target.value)}
               className="input mt-3" />
 
             {/* Auto-filled Donator Info */}

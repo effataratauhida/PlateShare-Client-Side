@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
                   </PrivateRoutes>
                 ),
                 
-                loader: () => fetch('http://localhost:3000/foodData')
+                loader: ({ params }) => fetch(`http://localhost:3000/foodData/${params.id}`)
 
             },
             {
