@@ -9,8 +9,6 @@ const AvailableFoods = () => {
     const foods = useLoaderData();
     //console.log(data)
 
-
-
     return (
         
         <div>
@@ -25,10 +23,10 @@ const AvailableFoods = () => {
         </div>
 
         {/* cards */}
-        <div className='max-w-11/12 mx-auto grid grid-cols-3 gap-4 pb-20 '>
+        <div className='max-w-11/12 mx-auto grid grid-cols-3 gap-5 pb-20 '>
             {foods?.length > 0 ? (
                 foods.map((food) => (
-                <div key={food._id} className='bg-[#edf8e9] p-4  rounded-sm shadow-sm'>
+                <div key={food._id} className='bg-[#edf8e9] p-4  rounded-sm shadow-lg'>
 
                     <img src={food.food_image} alt="" className='w-full max-h-[250px] rounded-sm' />
 
@@ -58,6 +56,8 @@ const AvailableFoods = () => {
                 <p>Loading</p>
             )
         }
+
+       
         </div>
         </div>
         

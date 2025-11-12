@@ -7,7 +7,8 @@ import AvailableFoods from '../Available-Foods/AvailableFoods';
 import FoodDetails from '../Private-Routes/FoodDetails';
 import Login from '../Login/Login';
 import Registration from '../Registration/Registration';
-import AuthLayout from '../AuthLayout/AuthLayout'
+import AuthLayout from '../AuthLayout/AuthLayout';
+import AddFood from '../Private-Routes/AddFood';
 
 export const router = createBrowserRouter([
     {
@@ -30,14 +31,10 @@ export const router = createBrowserRouter([
                 loader: () => fetch('http://localhost:3000/foodData')
 
             },
-            // {
-            //     path: '/login',
-            //     element: <Login></Login>
-            // },
-            // {
-            //     path: '/registration',
-            //     element: <Registration></Registration>
-            // }
+            {
+              path:'/addFood',
+              element: <AddFood></AddFood>
+            }
         ]
     },
     {
