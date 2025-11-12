@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router';
-//import logo from '/icons8-tableware-50.png';
+import { AuthContext } from '../../Pages/Provider/AuthProvider';
+import { FcBusinessman } from 'react-icons/fc'; 
 import '../Header/Navbar.css'
 
+
 const Navbar = () => {
+
+    const { user, signOutUser } = useContext(AuthContext); 
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const handleLogout = () => { 
+        signOutUser()
+        .then(() => {})
+        .catch(err => console.log(err));
+    };
+
     return (
         <div>
             <div className='bg-[#edf8e9] shadow-sm'>
@@ -49,7 +61,25 @@ const Navbar = () => {
                 </div>
 
                 <div className="navbar-end gap-3">
-                    <Link
+                    {user ? (
+                        <div className="relative">
+                            <img 
+                                onClick={() => setDropdownOpen(!dropdownOpen)} // ✅ extra: dropdown toggle
+                                src={user.photoURL || 'https://img.icons8.com/ios-filled/50/user.png'} // ✅ extra: profile pic
+                                alt="Profile" 
+                                className="w-10 h-10 rounded-full cursor-pointer" 
+                            />
+                            {dropdownOpen && ( 
+                                <ul className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-50">
+                                    <li className="px-4 py-2 hover:bg-gray-100"><Link to='/addFood'>Add Food</Link></li>
+                                    <li className="px-4 py-2 hover:bg-gray-100"><Link to='/manageFoods'>Manage My Foods</Link></li>
+                                    <li className="px-4 py-2 hover:bg-gray-100"><Link to='/myRequests'>My Food Requests</Link></li>
+                                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={handleLogout}>Logout</li>
+                                </ul>
+                            )}
+                        </div>
+                    ) : (
+                          <Link
                         to="/auth/login" 
                          
                         className='py-1 px-2 sm:py-2 sm:px-3 md:py-2 md:px-6 cursor-pointer 
@@ -59,6 +89,12 @@ const Navbar = () => {
                         '>
                          Login
                     </Link> 
+                    )
+                    }
+
+
+
+                    
                     
                    
                 </div>

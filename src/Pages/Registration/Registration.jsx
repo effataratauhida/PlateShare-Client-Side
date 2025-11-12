@@ -1,17 +1,36 @@
-import { EyeOff } from 'lucide-react';
-import React, { useState } from 'react';
+import React, {  useContext, useEffect, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { auth } from '../../firebase/firebase.config';
-const provider = new GoogleAuthProvider();
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
+import toast from 'react-hot-toast';
+import { Eye, EyeOff } from 'lucide-react';
+import { getAuth, GoogleAuthProvider, sendEmailVerification, signInWithPopup, updateProfile } from 'firebase/auth';
+import app from '../../firebase/firebase.config';
 
 const Registration = () => {
 
-const [error, setError] = useState('');
+  const { createUser, setUser} = useContext(AuthContext);
+  const [regSuccess, setRegSuccess] = useState(false);
+  const [error, setError] = useState('');
+  const [showPass, setShowPass] = useState(false);
+  const navigate = useNavigate();
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  useEffect(() => {
+        if (regSuccess) {
+            toast.success("Account created successfully!");
+            setRegSuccess(false); 
+            // navigate('/');
+            setTimeout(() => {
+            navigate('/');;
+          }, 1500);
+        } 
+  }, [regSuccess, navigate]);
+
 
     const handleRegister = (e) => {
-        e.prevent.default();
+        e.preventDefault();
 
     
         const form = e.target;
@@ -47,27 +66,72 @@ const [error, setError] = useState('');
         }
 
 
+        createUser(email, password)
+        .then(result => {
+            const user = result.user;
+            //console.log(user);
+            //setUser(user);
+            //setRegSuccess(true);
+            //form.reset();
+
+            //update user profile
+            const profile = {
+              displayName: name,
+              photoURL: photo,
+            }
+            updateProfile(user, profile)
+            .then(() => {
+                setUser({...user, 
+                    displayName: name,
+                    photoURL: photo
+                });
+                setRegSuccess(true);
+                 setTimeout(() => {
+                     navigate('/');
+                     }, 1500);
+            })
+            })
+        //     .catch()
+
+        //     //send verification email
+        //     // sendEmailVerification(user)
+        //     // .then(() => {
+        //     //     toast('Please verify your email address')
+        //     // })
+        
+        // })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setError(errorMessage);
+        })
+  };
+
+  const handleTogglePasswordShow = (event) => {
+            event.preventDefault();
+            setShowPass (!showPass);
     }
 
 
 
-     //  Google login
+      //  Google login
   const handleGoogleLogin = async () => {
-     //console.log('google btn clicked')
- 
- signInWithPopup(auth, provider)
- .then(result => {
-     console.log(result.user);
- })
- .catch (error =>  {
-     console.log(error)
- })
-}
+        try {
+          const result = await signInWithPopup(auth, provider);
+          setUser(result.user);
+          toast.success('Logged in with Google!');
+          navigate('/');
+        } 
+        catch (error) {
+          toast.error(error.message);
+        }
+  };
+
 
 
     return (
         <div>
-            <title>Register</title>
+            <title>Registration</title>
 
             <div className='max-w-11/12 mx-auto flex justify-center mt-10 pb-20 '>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5">
@@ -106,17 +170,17 @@ const [error, setError] = useState('');
         <label className="label">Password</label>
           <div className='relative'>
             <input 
-              //type={showPass ? 'text' : 'password'} 
+              type={showPass ? 'text' : 'password'} 
               name='password' 
               className="input" 
               placeholder="Password"
               required />
             <button 
-              //onClick={handleTogglePasswordShow}
+              onClick={handleTogglePasswordShow}
               className="btn btn-xs absolute top-2 right-7"> 
-              {/* {showPass 
+               {showPass 
               ? <EyeOff size={16} strokeWidth={1} /> 
-              : <Eye size={16} strokeWidth={1} />} */}
+              : <Eye size={16} strokeWidth={1} />} 
             </button>
             </div>
 
@@ -141,11 +205,12 @@ const [error, setError] = useState('');
           Continue with Google</button>
 
           <p className='text-center text-[#005a32] text-base font-medium mt-2'>Already have an account?{" "} <Link to='/auth/login' className='text-red-600 underline '>Please Login</Link></p>
+        
+        </fieldset>
 
-         
-
-            
-                        </fieldset>
+        {
+           error && <p className='text-red-500'>{error}</p>
+        }
                     </form>
                 </div>
             </div>
