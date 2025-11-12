@@ -1,9 +1,12 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
+
 const UpdateFood = () => {
-  const food = useLoaderData(); 
+  const food = useLoaderData();
+  const navigate = useNavigate(); 
+  //console.log(food)
   const [formData, setFormData] = useState(food);
 
   const handleChange = (e) => {
@@ -13,15 +16,21 @@ const UpdateFood = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    //console.log("Updating food with id:", food._id, formData);
+    const { _id, ...foodDataWithoutId } = formData;
+
     fetch(`http://localhost:3000/foodData/${food._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(foodDataWithoutId),
+      
     })
+    
       .then((res) => res.json())
       .then((data) => {
-        if (data.modifiedCount > 0) {
+        if (data.modifiedCount > 0 || data.matchedCount > 0) {
           toast.success("Food updated successfully!");
+          navigate("/")
         }
       });
   };

@@ -3,6 +3,7 @@ import bannerI from '../../assets/a.png'
 import { AuthContext } from './../Provider/AuthProvider';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router';
+import Swal from 'sweetalert2';
 
 const ManageMyFoods = () => {
 
@@ -18,23 +19,59 @@ const ManageMyFoods = () => {
     }
   }, [user]);
 
-
   const handleDelete = (id) => {
-  const confirm = window.confirm("Are you sure want to delete?");
-  if (confirm) {
-    fetch(`http://localhost:3000/foodData/${id}`, {
-      method: 'DELETE'
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.deletedCount) {
-          setMyFoods(myFoods.filter(f => f._id !== id));
-          toast.success("The food is deleted successfully!");
-        }
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to undo this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'Cancel'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      
+      fetch(`http://localhost:3000/foodData/${id}`, {
+        method: 'DELETE'
       })
-      .catch(err => console.error(err));
-  }
-}
+        .then(res => res.json())
+        .then(data => {
+          if (data.deletedCount) {
+            setMyFoods(myFoods.filter(f => f._id !== id));
+            Swal.fire(
+              'Deleted!',
+              'The food item has been deleted.',
+              'success'
+            );
+          }
+        })
+        .catch(err => console.error(err));
+    }
+  });
+};
+
+
+//   const handleDelete = (id) => {
+//   const confirm =  Swal.fire({
+//           text: "Are you sure want to delete?",
+          
+//           confirmButtonText: "OK",
+//         });;
+//   if (confirm) {
+//     fetch(`http://localhost:3000/foodData/${id}`, {
+//       method: 'DELETE'
+//     })
+//       .then(res => res.json())
+//       .then(data => {
+//         if (data.deletedCount) {
+//           setMyFoods(myFoods.filter(f => f._id !== id));
+//           toast.success("The food is deleted successfully!");
+//         }
+//       })
+//       .catch(err => console.error(err));
+//   }
+// }
 
     return (
 
@@ -52,9 +89,9 @@ const ManageMyFoods = () => {
 
 
                   <div className='max-w-7/12 mx-auto  pb-20 '>
-                {myFoods.map(food => (
+                
 
-                    <table key={food._id}>
+                    <table >
                         <thead >
                             <tr className="border-b border-gray-400 bg-[#edf8e9] shadow-lg text-center">
                                 
@@ -67,7 +104,8 @@ const ManageMyFoods = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className="border-b border-gray-400 bg-[#edf8e9] shadow-lg">
+                          {myFoods.map(food => (
+                            <tr key={food._id} className="border-b border-gray-400 bg-[#edf8e9] shadow-lg">
                                 <td className="px-6 py-4 font-semibold text-[#005a32] text-xl whitespace-nowrap">
                                     <img src={food.food_image}  alt='' className="w-12 h-12 rounded-full object-cover inline-block mr-3 shadow-sm" />
                                     {food.food_name}
@@ -93,9 +131,10 @@ const ManageMyFoods = () => {
                                     </button>
                                 </td>
                             </tr>
+                            ))}
                         </tbody>        
                     </table>
-                ))}
+                
             
         </div> 
 

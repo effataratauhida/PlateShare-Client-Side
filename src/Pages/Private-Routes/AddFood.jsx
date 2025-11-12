@@ -92,7 +92,7 @@ const AddFood = () => {
               required className="input mt-3" />
 
             <textarea placeholder="Additional Notes"
-              value={description} onChange={e => setNotes(e.target.value)}
+              value={description} onChange={e => setDescription(e.target.value)}
               className="input mt-3" />
 
             {/* Auto-filled Donator Info */}
