@@ -9,6 +9,9 @@ import Login from '../Login/Login';
 import Registration from '../Registration/Registration';
 import AuthLayout from '../AuthLayout/AuthLayout';
 import AddFood from '../Private-Routes/AddFood';
+import PrivateRoutes from '../../Components/privateRoutes';
+
+
 
 export const router = createBrowserRouter([
     {
@@ -27,13 +30,24 @@ export const router = createBrowserRouter([
             }, 
             {
                 path: '/food/:id',
-                element: <FoodDetails></FoodDetails>,
+                element: (
+                  <PrivateRoutes>
+                    <FoodDetails></FoodDetails>
+                  </PrivateRoutes>
+                ),
+                
                 loader: () => fetch('http://localhost:3000/foodData')
 
             },
             {
               path:'/addFood',
-              element: <AddFood></AddFood>
+              element: (
+                <PrivateRoutes>
+                  <AddFood></AddFood>
+                </PrivateRoutes>
+                  
+               
+              )
             }
         ]
     },
