@@ -1,6 +1,6 @@
 #  PlateShare – Donate. Connect. Care.
 
-[Live Site Link](https://your-live-site-url.com)
+[Live Site Link](https://plateshare-26a35.web.app)
 
 ## Description
 PlateShare is a web application that allows users to donate and request leftover food efficiently. The platform connects donors with people in need, making food sharing simple and effective.
