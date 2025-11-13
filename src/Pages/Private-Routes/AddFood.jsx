@@ -60,6 +60,7 @@ const AddFood = () => {
   };
 
   return (
+    <><title>Add Food</title>
     <div className='max-w-11/12 mx-auto flex justify-center mt-10 pb-20'>
       <div className="card w-full max-w-sm shrink-0 shadow-2xl py-5 bg-[#edf8e9]">
 
@@ -123,6 +124,7 @@ const AddFood = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

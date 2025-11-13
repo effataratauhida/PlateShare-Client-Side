@@ -12,6 +12,8 @@ import AddFood from '../Private-Routes/AddFood';
 import PrivateRoutes from '../../Components/privateRoutes';
 import ManageMyFoods from '../Private-Routes/ManageMyFoods';
 import UpdateFood from '../UpdateFood/UpdateFood';
+import MyFoodRequests from '../Private-Routes/MyFoodRequests';
+import PrivateLayout from '../Private-Routes/PrivateLayout';
 
 
 
@@ -61,6 +63,14 @@ export const router = createBrowserRouter([
               )
             },
             {
+              path: '/foodRequest',
+              element: (
+                <PrivateRoutes>
+                  <MyFoodRequests></MyFoodRequests>
+                </PrivateRoutes>
+              )
+            },
+            {
               path: "/updateFood/:id",
               element: (
                  <PrivateRoutes>
@@ -71,7 +81,8 @@ export const router = createBrowserRouter([
 }
         ]
     },
-    {
+
+  {
           path: '/auth',
           element: <AuthLayout></AuthLayout>,
           children: [

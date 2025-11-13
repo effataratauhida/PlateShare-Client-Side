@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import toast from 'react-hot-toast';
 
@@ -16,6 +16,7 @@ const FoodDetails = () => {
     reason: '',
     contactNo: ''
   });
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -64,6 +65,7 @@ useEffect(() => {
     .then(res => res.json())
     .then(data => {
       toast.success("Request submitted successfully!");
+      navigate('/')
       setShowModal(false);
       setRequestData({ location: '', reason: '', contactNo: '' });
     })
@@ -97,6 +99,7 @@ const handleRequestAction = (requestId, action) => {
 
 
   return (
+    <> <title>Food Details</title>
     <div className="max-w-11/12 mx-auto my-10 p-4 bg-[#edf8e9] rounded-sm shadow-lg">
 
        {/* food details */}
@@ -128,7 +131,7 @@ const handleRequestAction = (requestId, action) => {
       
             {/* donators info */}
 
-            <div className="mt-5 border-t pt-3 ">
+            <div className="mt-5 border-t pt-3 pb-20 ">
                 
                 <h2 className=" font-bold text-2xl text-[#005a32]">Donator's Information:</h2>
                 <div className='flex gap-5 mt-5 '>
@@ -185,47 +188,75 @@ const handleRequestAction = (requestId, action) => {
       </form>
     </div>
   </div>
-)}
+          )}
 
 
-{isOwner && requests.length > 0 && (
-  <div className="mt-10">
-    <h2 className="text-2xl font-bold text-[#005a32] mb-4">Food Requests</h2>
-    <table className="w-full border">
+
+
+        {isOwner && requests.length > 0 && (
+  <div className="my-10">
+    <h2 className="text-2xl font-bold text-[#005a32] mb-6 text-center">
+      Food Requests
+    </h2>
+
+    <table className="w-full border border-[#005a32] rounded-lg overflow-hidden shadow-lg">
       <thead>
-        <tr className="bg-[#edf8e9]">
-          <th className="border px-4 py-2">Requester Name</th>
-          <th className="border px-4 py-2">Email</th>
-          <th className="border px-4 py-2">Location</th>
-          <th className="border px-4 py-2">Reason</th>
-          <th className="border px-4 py-2">Contact</th>
-          <th className="border px-4 py-2">Status</th>
-          <th className="border px-4 py-2">Actions</th>
+        <tr className="border-b border-gray-400 bg-[#def6d6] shadow-lg text-center">
+          <td className="px-6 py-4 font-bold text-[#005a32] text-base">Requester</td>
+          <td className="px-6 py-4 font-bold text-[#005a32] text-base">Email</td>
+          <td className="px-6 py-4 font-bold text-[#005a32] text-base">Location</td>
+          <td className="px-6 py-4 font-bold text-[#005a32] text-base">Reason</td>
+          <td className="px-6 py-4 font-bold text-[#005a32] text-base">Contact</td>
+          <td className="px-6 py-4 font-bold text-[#005a32] text-base">Status</td>
+          <td className="px-6 py-4 font-bold text-[#005a32] text-base">Actions</td>
         </tr>
       </thead>
       <tbody>
-        {requests.map(req => (
-          <tr key={req._id} className="text-center">
-            <td className="border px-4 py-2">{req.requesterName}</td>
-            <td className="border px-4 py-2">{req.requesterEmail}</td>
-            <td className="border px-4 py-2">{req.location}</td>
-            <td className="border px-4 py-2">{req.reason}</td>
-            <td className="border px-4 py-2">{req.contactNo}</td>
-            <td className="border px-4 py-2">{req.status}</td>
-            <td className="border px-4 py-2 flex justify-center gap-2">
-              <button onClick={() => handleRequestAction(req._id, 'accepted')} className="px-2 py-1 bg-green-500 text-white rounded">Accept</button>
-              <button onClick={() => handleRequestAction(req._id, 'rejected')} className="px-2 py-1 bg-red-500 text-white rounded">Reject</button>
+        {requests.map((req) => (
+          <tr key={req._id} className="border-b border-gray-400 bg-[#edf8e9] shadow-sm hover:bg-[#e5f5e0] text-center">
+            <td className="px-6 py-4 font-semibold text-[#005a32] text-lg whitespace-nowrap">
+              {req.requesterName}
+            </td>
+            <td className="px-6 py-4 font-semibold text-[#005a32] text-lg">{req.requesterEmail}</td>
+            <td className="px-6 py-4 font-semibold text-[#005a32] text-lg">{req.location}</td>
+            <td className="px-6 py-4 font-semibold text-[#005a32] text-lg">{req.reason}</td>
+            <td className="px-6 py-4 font-semibold text-[#005a32] text-lg">{req.contactNo}</td>
+            <td
+              className={`px-6 py-4 font-semibold text-lg ${
+                req.status === "pending"
+                  ? "text-yellow-600"
+                  : req.status === "accepted"
+                  ? "text-green-600"
+                  : "text-red-600"
+              }`}
+            >
+              {req.status}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap flex justify-center items-center space-x-2">
+              <button
+                onClick={() => handleRequestAction(req._id, "accepted")}
+                className="py-2 px-4 rounded-lg font-semibold bg-[#238b45] text-white hover:bg-transparent hover:border-2 hover:border-[#238b45] hover:text-[#238b45]"
+              >
+                Accept
+              </button>
+              <button
+                onClick={() => handleRequestAction(req._id, "rejected")}
+                className="py-2 px-4 rounded-lg font-semibold bg-red-600 hover:bg-transparent hover:border-2 hover:border-red-600 hover:text-red-600 text-white"
+              >
+                Reject
+              </button>
             </td>
           </tr>
         ))}
       </tbody>
     </table>
   </div>
-)}
+        )}
+
 
         </div>
         
-    
+    </>
   );
 };
 

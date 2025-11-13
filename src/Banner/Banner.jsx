@@ -22,11 +22,11 @@ const Banner = () => {
 
 
     return (
-         <div >
+         <div  >
             {/* hero section */}
-            <div className=" relative mb-20">
+            <div  className=" relative mb-20">
                 <img src={bannerI} alt="" className='h-[300px] w-full ' />
-             <div className='max-w-11/12 mx-auto absolute inset-0 flex flex-col items-center justify-center text-center'>
+             <div  className='max-w-11/12 mx-auto absolute inset-0 flex flex-col items-center justify-center text-center'>
                 <h1 className=' text-[#edf8e9] text-4xl font-bold mt-0'>PlateShare – Donate. Connect. Care.</h1>
                 <p className=' text-[#edf8e9] mt-7 text-lg font-medium'>Turn your leftovers into hope. PlateShare makes it easy to share food and make a difference in your community.</p>
 
@@ -43,7 +43,8 @@ const Banner = () => {
             </div>
 
             {/* Dynamic Section (Featured Foods) */}
-            <div className='max-w-11/12 mx-auto  pb-20'>
+            <div data-aos="fade-up"
+            className='max-w-11/12 mx-auto  pb-20'>
             
                 <h1 className=' text-[#005a32] text-4xl font-bold text-center'>
                     Most Available Meals</h1>
@@ -55,7 +56,7 @@ const Banner = () => {
                     {topFoods.map(food => (
 
                          <div key={food._id}
-                         className="bg-[#edf8e9] p-4  rounded-sm shadow-lg ">
+                         className="bg-[#edf8e9] p-4 hover:scale-105 rounded-sm shadow-lg ">
 
                         <img src={food.food_image} className='w-full max-h-[250px] rounded-sm'></img>
 
@@ -100,7 +101,7 @@ const Banner = () => {
             </div>
 
             {/* how it works */}
-            <div className='max-w-11/12 mx-auto pb-20'>
+            <div data-aos="fade-up" className='max-w-11/12 mx-auto pb-20 '>
                   
                 <h1 className=' text-[#005a32] text-4xl font-bold  text-center'>
                     How It Works</h1>
@@ -142,7 +143,7 @@ const Banner = () => {
 
             {/* our mission */}
 
-            <div className='max-w-11/12 mx-auto mb-20 text-center'>
+            <div data-aos="fade-up" className='max-w-11/12 mx-auto mb-20 text-center'>
             <h1 className=' text-[#005a32] text-4xl font-bold '>
                     Our Mission</h1>
                 <p className='text-[#005a32] mt-5 text-lg font-medium text-center'>

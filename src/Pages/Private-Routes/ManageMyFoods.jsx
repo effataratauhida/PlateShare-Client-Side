@@ -56,6 +56,7 @@ const ManageMyFoods = () => {
     return (
 
         <div>
+          <title> Manage My Foods </title>
             <div className=" relative mb-14">
                                     <img src={bannerI} alt="" className='h-[300px] w-full ' />
                                  <div className='max-w-11/12 mx-auto absolute inset-0 flex flex-col items-center justify-center text-center'>
@@ -63,7 +64,7 @@ const ManageMyFoods = () => {
                                     <p className=' text-[#edf8e9] mt-5 text-lg font-medium'>
                                         Manage My Food allows you to view, update, or remove the food items you’ve added. Keep track of your contributions, update details, and ensure your donations reach those in need efficiently.</p>
                                     
-                                    {/* all the cards */}
+                                    
                              </div>
                     </div>
 

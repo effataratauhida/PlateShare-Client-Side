@@ -73,8 +73,9 @@ const Navbar = () => {
                                 <ul className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-50">
                                     <li className="px-4 py-2 text-[#005a32] font-medium hover:bg-gray-100"><Link to='/addFood'>Add Food</Link></li>
                                     <li className="px-4 py-2 text-[#005a32] font-medium hover:bg-gray-100"><Link to='/manageFoods'>Manage My Foods</Link></li>
-                                    <li className="px-4 py-2 text-[#005a32] font-medium hover:bg-gray-100"><Link to='/myRequests'>My Food Requests</Link></li>
-                                    <li className="px-4 py-2 text-white hover:text-[#238b45] font-medium bg-[#238b45] hover:bg-gray-100 cursor-pointer" onClick={handleLogout}>Logout</li>
+                                    <li className="px-4 py-2 text-[#005a32] font-medium hover:bg-gray-100"><Link to='/foodRequest'>My Food Requests</Link></li>
+                                    <button className="rounded-sm ml-10 px-4 py-2 text-white hover:text-[#238b45] font-medium bg-[#238b45] hover:bg-gray-100 cursor-pointer" 
+                                    onClick={handleLogout}>Logout</button>
                                 </ul>
                                
                             )}

@@ -36,6 +36,8 @@ const UpdateFood = () => {
   };
 
   return (
+    <><title>Update Food</title>
+
     <div className="max-w-xl mx-auto mt-10 mb-20 bg-[#edf8e9] p-6 rounded-lg shadow-lg">
       <h1 className="text-2xl font-bold text-center mb-5 text-[#005a32]">Update Food</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -76,6 +78,7 @@ const UpdateFood = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 

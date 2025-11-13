@@ -12,6 +12,7 @@ const AvailableFoods = () => {
     return (
         
         <div>
+            <title>Available Foods</title>
             <div className=" relative mb-10">
                         <img src={bannerI} alt="" className='h-[300px] w-full ' />
                      <div className='max-w-11/12 mx-auto absolute inset-0 flex flex-col items-center justify-center text-center'>
@@ -23,10 +24,11 @@ const AvailableFoods = () => {
         </div>
 
         {/* cards */}
-        <div className='max-w-11/12 mx-auto grid grid-cols-3 gap-5 pb-20 '>
+        <div data-aos="fade-up"
+        className='max-w-11/12 mx-auto grid grid-cols-3 gap-5 pb-20 '>
             {foods?.length > 0 ? (
                 foods.map((food) => (
-                <div key={food._id} className='bg-[#edf8e9] p-4  rounded-sm shadow-lg'>
+                <div key={food._id} className='bg-[#edf8e9] p-4 hover:scale-105 rounded-sm shadow-lg'>
 
                     <img src={food.food_image} alt="" className='w-full max-h-[250px] rounded-sm' />
 
