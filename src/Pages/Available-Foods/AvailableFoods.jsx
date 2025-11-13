@@ -83,7 +83,7 @@ const AvailableFoods = () => {
                 </div>
                 ))
             ) : (
-                <p>Loading</p>
+                <p className="text-4xl font-semibold text-[#1d5008] text-center">Loading</p>
             )
         }
 

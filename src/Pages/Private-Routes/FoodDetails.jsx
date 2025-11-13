@@ -135,7 +135,7 @@ const handleRequestAction = (requestId, action) => {
             <div className="mt-5 border-t pt-3  ">
                 
                 <h2 className=" font-bold text-2xl text-[#005a32]">Donator's Information:</h2>
-                <div className='flex  gap-5 mt-5 '>
+                <div className='flex flex-col md:flex-row gap-5 mt-5 '>
                     <img src={food.donator_image} alt="" className='w-40 h-40 rounded-lg'/>
 
                     <div>
