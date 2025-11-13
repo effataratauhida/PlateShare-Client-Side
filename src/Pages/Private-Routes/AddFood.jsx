@@ -37,7 +37,7 @@ const AddFood = () => {
     };
 
     // Send to server
-    fetch('http://localhost:3000/foodData', {
+    fetch('https://plate-share-server-delta.vercel.app/foodData', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(foodData)

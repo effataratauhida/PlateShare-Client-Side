@@ -12,7 +12,7 @@ const Banner = () => {
      const [loading, setLoading] = useState(true);
 
      useEffect(() => {
-    fetch('http://localhost:3000/foodData')
+    fetch('https://plate-share-server-delta.vercel.app/foodData')
       .then(res => res.json())
       .then(data => {
         const sortedData = data.sort((a,b) => b.food_qty - a.food_qty);

@@ -19,7 +19,7 @@ const UpdateFood = () => {
     //console.log("Updating food with id:", food._id, formData);
     const { _id, ...foodDataWithoutId } = formData;
 
-    fetch(`http://localhost:3000/foodData/${food._id}`, {
+    fetch(`https://plate-share-server-delta.vercel.app/foodData/${food._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(foodDataWithoutId),

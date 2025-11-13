@@ -12,7 +12,7 @@ const ManageMyFoods = () => {
 
      useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/myFoods?email=${user.email}`)
+      fetch(`https://plate-share-server-delta.vercel.app/myFoods?email=${user.email}`)
         .then(res => res.json())
         .then(data => setMyFoods(data))
         .catch(err => console.error(err));
@@ -32,7 +32,7 @@ const ManageMyFoods = () => {
   }).then((result) => {
     if (result.isConfirmed) {
       
-      fetch(`http://localhost:3000/foodData/${id}`, {
+      fetch(`https://plate-share-server-delta.vercel.app/foodData/${id}`, {
         method: 'DELETE'
       })
         .then(res => res.json())

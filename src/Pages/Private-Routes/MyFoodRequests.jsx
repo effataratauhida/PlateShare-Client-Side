@@ -8,7 +8,7 @@ const MyFoodRequests = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/myFoodRequests?email=${user.email}`)
+      fetch(`https://plate-share-server-delta.vercel.app/myFoodRequests?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => setRequests(data))
         .catch((err) => console.error(err));

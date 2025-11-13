@@ -20,7 +20,7 @@ const FoodDetails = () => {
 
 
   useEffect(() => {
-    fetch(`http://localhost:3000/foodData/${id}`)
+    fetch(`https://plate-share-server-delta.vercel.app/foodData/${id}`)
       .then(res => res.json())
       .then(data => setFood(data))
       .catch(err => console.error(err));
@@ -29,7 +29,7 @@ const FoodDetails = () => {
 
 useEffect(() => {
   if (isOwner) {
-    fetch(`http://localhost:3000/foodRequests?foodId=${food._id}`)
+    fetch(`https://plate-share-server-delta.vercel.app/foodRequests?foodId=${food._id}`)
       .then(res => res.json())
       .then(data => setRequests(data))
       .catch(err => console.error(err));
@@ -57,7 +57,7 @@ useEffect(() => {
     status: "pending"
   };
 
-  fetch('http://localhost:3000/foodRequests', {
+  fetch('https://plate-share-server-delta.vercel.app/foodRequests', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(newRequest)
@@ -75,7 +75,7 @@ useEffect(() => {
 
 
 const handleRequestAction = (requestId, action) => {
-  fetch(`http://localhost:3000/foodRequests/${requestId}`, {
+  fetch(`https://plate-share-server-delta.vercel.app/foodRequests/${requestId}`, {
     method: 'PATCH', 
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ status: action })
@@ -86,7 +86,7 @@ const handleRequestAction = (requestId, action) => {
         setRequests(prev => prev.map(req => req._id === requestId ? {...req, status: action} : req));
         if (action === 'accepted') {
           // Food status update
-          fetch(`http://localhost:3000/foodData/${food._id}`, {
+          fetch(`https://plate-share-server-delta.vercel.app/foodData/${food._id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ food_status: 'donated' })
