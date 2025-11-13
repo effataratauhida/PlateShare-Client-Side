@@ -104,24 +104,25 @@ const handleRequestAction = (requestId, action) => {
 
        {/* food details */}
         
-            <div className='flex gap-5'>
-                <img src={food.food_image} className='w-1/2 max-h-80 rounded-sm'></img>
+            <div className='flex flex-col sm:flex-row gap-5'>
+                <img src={food.food_image} className='sm:w-1/2 max-h-80 rounded-sm'></img>
 
                 <div>
                     <h2 className=' font-bold text-2xl text-[#005a32]'>{food.food_name}</h2>
-                <h3 className='mt-2 font-bold text-lg text-[#005a32] '>Quantity: <span className='font-medium text-lg text-[#005a32] '>{food.food_qty}</span></h3>
-                <h3 className='mt-2 font-bold text-lg text-[#005a32] '>Pickup Location: <span className='font-medium text-lg text-[#005a32] '>{food.pickup_location}</span>
+                <h3 className='mt-2 font-bold text-base md:text-lg text-[#005a32] '>Quantity: <span className='font-medium text-base md:text-lg text-[#005a32] '>{food.food_qty}</span></h3>
+                <h3 className='mt-2 font-bold text-base md:text-lg text-[#005a32] '>Pickup Location: <span className='font-medium text-base md:text-lg text-[#005a32] '>{food.pickup_location}</span>
                   </h3>
-                <h3 className='mt-2 font-bold text-lg text-[#005a32] '>Expire Date: <span className='font-medium text-lg text-[#005a32] '>{food.expire_date}</span></h3>
+                <h3 className='mt-2 font-bold text-base md:text-lg text-[#005a32] '>Expire Date: <span className='font-medium text-base md:text-lg text-[#005a32] '>{food.expire_date}</span></h3>
                           
-                <p className='mt-2 font-bold text-lg text-[#005a32] '>Additional notes: <span className='font-medium text-lg text-[#005a32] '>{food.description}</span></p>
+                <p className='mt-2 font-bold text-base md:text-lg text-[#005a32] '>Additional notes: <span className='font-medium text-base md:text-lg text-[#005a32] '>{food.description}</span></p>
 
-                <p className='border-2 border-[#005a32] px-4 py-1 mt-2 text-[#005a32] inline-block text-center rounded-3xl'>{food.food_status}</p>
+                <p className='border-2 border-[#005a32] px-3 md:px-4 py-1 mt-2 text-base text-[#005a32] inline-block font-medium 
+                text-center rounded-3xl'>{food.food_status}</p>
                 <br />
 
                 <button   onClick={() => setShowModal(true)}
-                 className='mt-4 py-1 px-2 sm:py-2 sm:px-3 md:py-2 md:px-6 inline-block cursor-pointer 
-                  rounded-sm font-semibold text-sm sm:text-base bg-[#238b45] hover:bg-transparent
+                 className='mt-4 py-2 px-6  md:py-2 md:px-6 inline-block cursor-pointer 
+                  rounded-sm font-semibold text-base bg-[#238b45] hover:bg-transparent
                 border-[#238b45] hover:border-[#005a32] border-2 hover:scale-105
                 text-white hover:text-[#005a32]'>
                   Request Food</button>  
@@ -131,16 +132,16 @@ const handleRequestAction = (requestId, action) => {
       
             {/* donators info */}
 
-            <div className="mt-5 border-t pt-3 pb-20 ">
+            <div className="mt-5 border-t pt-3  ">
                 
                 <h2 className=" font-bold text-2xl text-[#005a32]">Donator's Information:</h2>
-                <div className='flex gap-5 mt-5 '>
+                <div className='flex  gap-5 mt-5 '>
                     <img src={food.donator_image} alt="" className='w-40 h-40 rounded-lg'/>
 
                     <div>
-                        <p className='mt-3 font-bold text-lg text-[#005a32]'>Name: <span className='font-medium text-lg text-[#005a32] '>{food.donator_name}</span></p>
+                        <p className='mt-3 font-bold text-base sm:text-lg text-[#005a32]'>Name: <span className='font-medium text-base sm:text-lg text-[#005a32] '>{food.donator_name}</span></p>
         
-                        <p className='mt-3 font-bold text-lg text-[#005a32]'>Email: <span className='font-medium text-lg text-[#005a32] '>{food.donator_email}</span></p>
+                        <p className='mt-3 font-bold text-base sm:text-lg text-[#005a32]'>Email: <span className='font-medium text-base sm:text-lg text-[#005a32] '>{food.donator_email}</span></p>
                     </div>
                 </div>
         
@@ -152,8 +153,10 @@ const handleRequestAction = (requestId, action) => {
             <div className="fixed inset-0 bg-[#edf8e9]  bg-opacity-50 flex justify-center items-center">
               <div className="bg-white p-6 rounded-lg w-11/12 max-w-md">
                 <h2 className="text-2xl font-bold text-[#005a32] mb-4">Request Food</h2>
-      <form onSubmit={handleRequestSubmit} 
-      className="space-y-4">
+           
+            <form onSubmit={handleRequestSubmit} 
+             className="space-y-4">
+
         <input
           type="text"
           placeholder="Your Location"
@@ -162,6 +165,7 @@ const handleRequestAction = (requestId, action) => {
           className="w-full p-2 border rounded"
           required
         />
+
         <textarea
           placeholder="Why do you need food?"
           value={requestData.reason}
@@ -194,13 +198,13 @@ const handleRequestAction = (requestId, action) => {
 
 
         {isOwner && requests.length > 0 && (
-  <div className="my-10">
-    <h2 className="text-2xl font-bold text-[#005a32] mb-6 text-center">
-      Food Requests
-    </h2>
+          <div className="my-10">
+           <h2 className="text-2xl font-bold text-[#005a32] mb-6 text-center">
+             Food Requests
+           </h2>
 
-    <table className="w-full border border-[#005a32] rounded-lg overflow-hidden shadow-lg">
-      <thead>
+         <table className="w-full border border-[#005a32] rounded-lg overflow-hidden shadow-lg">
+          <thead>
         <tr className="border-b border-gray-400 bg-[#def6d6] shadow-lg text-center">
           <td className="px-6 py-4 font-bold text-[#005a32] text-base">Requester</td>
           <td className="px-6 py-4 font-bold text-[#005a32] text-base">Email</td>
@@ -210,10 +214,10 @@ const handleRequestAction = (requestId, action) => {
           <td className="px-6 py-4 font-bold text-[#005a32] text-base">Status</td>
           <td className="px-6 py-4 font-bold text-[#005a32] text-base">Actions</td>
         </tr>
-      </thead>
-      <tbody>
-        {requests.map((req) => (
-          <tr key={req._id} className="border-b border-gray-400 bg-[#edf8e9] shadow-sm hover:bg-[#e5f5e0] text-center">
+          </thead>
+          <tbody>
+            {requests.map((req) => (
+           <tr key={req._id} className="border-b border-gray-400 bg-[#edf8e9] shadow-sm hover:bg-[#e5f5e0] text-center">
             <td className="px-6 py-4 font-semibold text-[#005a32] text-lg whitespace-nowrap">
               {req.requesterName}
             </td>
@@ -247,10 +251,10 @@ const handleRequestAction = (requestId, action) => {
               </button>
             </td>
           </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
+           ))}
+        </tbody>
+       </table>
+        </div>
         )}
 
 

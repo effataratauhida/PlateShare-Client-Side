@@ -1,19 +1,25 @@
 import React, { useContext, useState } from 'react';
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 import { AuthContext } from '../../Pages/Provider/AuthProvider';
 import { FcBusinessman } from 'react-icons/fc'; 
 import '../Header/Navbar.css'
+import toast from 'react-hot-toast';
 
 
 const Navbar = () => {
 
     const { user, signOutUser } = useContext(AuthContext); 
     const [dropdownOpen, setDropdownOpen] = useState(false);
+      const navigate = useNavigate();
 
     const handleLogout = () => { 
         signOutUser()
-        .then(() => {})
-        .catch(err => console.log(err));
+        .then(() => {
+            toast.success("Logged out successfully!");
+            navigate("/");
+        })
+        .catch(err => 
+            console.log(err));
     };
 
     return (
@@ -64,10 +70,10 @@ const Navbar = () => {
                     {user ? (
                         <div className="relative">
                             <img 
-                                onClick={() => setDropdownOpen(!dropdownOpen)} // ✅ extra: dropdown toggle
-                                src={user.photoURL || 'https://img.icons8.com/ios-filled/50/user.png'} // ✅ extra: profile pic
+                                onClick={() => setDropdownOpen(!dropdownOpen)} 
+                                src={user.photoURL || 'https://img.icons8.com/ios-filled/50/user.png'} 
                                 alt="Profile" 
-                                className="w-10 h-10 rounded-full cursor-pointer" 
+                                className="w-12 h-12 rounded-full cursor-pointer" 
                             />
                             {dropdownOpen && ( 
                                 <ul className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-50">
@@ -94,11 +100,6 @@ const Navbar = () => {
                     )
                     }
 
-
-
-                    
-                    
-                   
                 </div>
             </div>
         </div>

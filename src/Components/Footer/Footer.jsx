@@ -8,7 +8,7 @@ import { FaSquareInstagram } from "react-icons/fa6";
 const Footer = () => {
     return (
         <footer className='bg-[#238b45]'>
-                <div className='max-w-11/12 mx-auto py-8 grid grid-cols-2 md:grid-cols-3 gap-4 text-white'>
+                <div className='max-w-11/12 mx-auto py-8 grid grid-cols-1 md:grid-cols-3 gap-4 text-white'>
                     <div>
                     <Link to='/' className="flex items-center gap-2 text-[#edf8e9] ">
                    <img width="40" height="40" src="https://img.icons8.com/ios/50/tableware.png" alt="tableware" className="invert brightness-0"/>
@@ -83,7 +83,8 @@ const Footer = () => {
                 </div>
                 <div className='max-w-11/12 mx-auto'>
                 <hr className='text-[#edf8e9] mt-3'/>
-                <p className='text-[#edf8e9]  text-center font-medium py-5' >Copyright reserved by @2025</p>
+                <p className='text-[#edf8e9]  text-center 
+                font-medium py-5' >Copyright @2025 All Rights Reserved Design by PlateShare</p>
                 </div>
                 
             </footer>

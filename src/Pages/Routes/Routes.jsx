@@ -13,7 +13,7 @@ import PrivateRoutes from '../../Components/privateRoutes';
 import ManageMyFoods from '../Private-Routes/ManageMyFoods';
 import UpdateFood from '../UpdateFood/UpdateFood';
 import MyFoodRequests from '../Private-Routes/MyFoodRequests';
-import PrivateLayout from '../Private-Routes/PrivateLayout';
+
 
 
 

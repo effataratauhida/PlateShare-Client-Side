@@ -21,9 +21,9 @@ const MyFoodRequests = () => {
     <div className=" relative mb-14">
         <img src={bannerI} alt="" className='h-[300px] w-full ' />
         <div className='max-w-11/12 mx-auto absolute inset-0 flex flex-col items-center justify-center text-center'>
-            <h1 className=' text-[#edf8e9] text-4xl font-bold mt-0'>My Food Requests</h1>
+            <h1 className=' text-[#edf8e9] text-3xl md:text-4xl font-bold mt-0'>My Food Requests</h1>
             
-                <p className="text-lg font-medium text-[#edf8e9] max-w-3xl mx-auto leading-relaxed mt-5">
+                <p className="md:text-lg text-base font-medium text-[#edf8e9] max-w-3xl mx-auto leading-relaxed mt-5">
                Here you can view all the food requests you’ve submitted.  
                  Track the status of each request — whether it’s <span className="text-yellow-400 font-semibold">pending</span> ,  
                 <span className="text-green-400 font-semibold"> accepted</span> , or  
@@ -34,7 +34,7 @@ const MyFoodRequests = () => {
         </div>
         </div>
 
-    <div className="max-w-5xl mx-auto my-10 bg-[#edf8e9] p-6 rounded-lg shadow">
+    <div className="max-w-11/12 mx-auto flex justify-center my-10 bg-[#edf8e9] p-6 rounded-lg shadow">
       
 
       {requests.length === 0 ? (
@@ -42,9 +42,9 @@ const MyFoodRequests = () => {
           You haven’t made any requests yet 
         </p>
       ) : (
-        
+        <div className="max-w-full mx-auto overflow-x-auto md:overflow-x-visible">
         <table className="w-full border border-[#005a32] rounded-lg overflow-hidden shadow-lg">
-  <thead>
+      <thead>
     <tr className="border-b border-gray-400 bg-[#edf8e9] shadow-lg text-center">
       <td className="px-6 py-4 font-bold text-[#005a32] text-base">Food Name</td>
       <td className="px-6 py-4 font-bold text-[#005a32] text-base">Location</td>
@@ -52,8 +52,8 @@ const MyFoodRequests = () => {
       <td className="px-6 py-4 font-bold text-[#005a32] text-base">Contact</td>
       <td className="px-6 py-4 font-bold text-[#005a32] text-base">Status</td>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+     <tbody>
     {requests.map((req) => (
       <tr key={req._id} className="border-b border-gray-400 bg-[#edf8e9] shadow-sm hover:bg-[#e5f5e0] text-center">
         <td className="px-6 py-4 font-semibold text-[#005a32] text-lg whitespace-nowrap">
@@ -75,9 +75,9 @@ const MyFoodRequests = () => {
         </td>
       </tr>
     ))}
-  </tbody>
-</table>
-
+     </tbody>
+     </table>
+      </div>
       )}
     </div>
     </>

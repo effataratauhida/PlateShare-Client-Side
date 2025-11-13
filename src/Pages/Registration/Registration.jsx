@@ -134,7 +134,7 @@ const Registration = () => {
             <title>Registration</title>
 
             <div className='max-w-11/12 mx-auto flex justify-center mt-10 pb-20 '>
-                <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5">
+                <div className="card bg-[#edf8e9] w-full max-w-sm shrink-0 shadow-2xl py-5">
                     <h2 className='font-bold text-2xl text-center text-[#005a32]'>Register Your Account</h2>
 
                     <form onSubmit={handleRegister}

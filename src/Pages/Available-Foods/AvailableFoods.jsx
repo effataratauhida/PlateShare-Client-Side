@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import bannerI from '../../assets/a.png'
 import { Link, useLoaderData } from 'react-router-dom';
 
@@ -6,18 +6,43 @@ import { Link, useLoaderData } from 'react-router-dom';
 
 const AvailableFoods = () => {
 
-    const foods = useLoaderData();
+    //const foods = useLoaderData();
     //console.log(data)
+
+    const [foods, setFoods] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+     useEffect(() => {
+    fetch('http://localhost:3000/foodData')
+      .then(res => res.json())
+      .then(data => {
+        setFoods(data);
+        setLoading(false); 
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
+
+   if (loading) {
+    return (
+        <div className="flex justify-center items-center h-screen bg-[#d2e7d0] py-20">
+            <p className="text-4xl font-semibold text-[#1d5008]">
+                L <span className="loading loading-spinner loading-xl"></span> ading...</p>
+        </div>
+    );
+}
 
     return (
         
         <div>
             <title>Available Foods</title>
             <div className=" relative mb-10">
-                        <img src={bannerI} alt="" className='h-[300px] w-full ' />
-                     <div className='max-w-11/12 mx-auto absolute inset-0 flex flex-col items-center justify-center text-center'>
-                        <h1 className=' text-[#edf8e9] text-4xl font-bold mt-0'>Available Foods</h1>
-                        <p className=' text-[#edf8e9] mt-5 text-lg font-medium'>Explore freshly donated meals and food items shared by our generous contributors. Request any item and help reduce food waste while feeding someone in need</p>
+                    <img src={bannerI} alt="" className='h-[300px] w-full ' />
+                    <div className='max-w-11/12 mx-auto absolute inset-0 flex flex-col items-center justify-center text-center'>
+                        <h1 className=' text-[#edf8e9] text-3xl md:text-4xl font-bold mt-0'>Available Foods</h1>
+                        <p className=' text-[#edf8e9] mt-5 md:text-lg text-base font-medium'>Explore freshly donated meals and food items shared by our generous contributors. Request any item and help reduce food waste while feeding someone in need</p>
                         
                         {/* all the cards */}
                  </div>
@@ -25,7 +50,7 @@ const AvailableFoods = () => {
 
         {/* cards */}
         <div data-aos="fade-up"
-        className='max-w-11/12 mx-auto grid grid-cols-3 gap-5 pb-20 '>
+        className='max-w-11/12 mx-auto grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-5 pb-20 '>
             {foods?.length > 0 ? (
                 foods.map((food) => (
                 <div key={food._id} className='bg-[#edf8e9] p-4 hover:scale-105 rounded-sm shadow-lg'>
@@ -36,7 +61,7 @@ const AvailableFoods = () => {
                     
 
                      {/* donator name , img */}
-                    <div className='flex flex-col-reverse sm:flex-row items-center justify-between '>
+                    <div className='flex flex-row items-center justify-between '>
                         <h2 className=' font-bold text-base text-[#005a32]'>Donator's Name: <span className='font-medium text-base text-[#005a32] '>{food.donator_name}</span></h2>
                         <img src={food.donator_image} alt="" className='w-12 h-12 rounded-full'/>
                     </div>
